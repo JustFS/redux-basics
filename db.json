@@ -1,0 +1,19 @@
+{
+  "posts": [
+    {
+      "name": "lion",
+      "continent": "afrique",
+      "id": "1"
+    },
+    {
+      "name": "girafe",
+      "continent": "afrique",
+      "id": "2"
+    },
+    {
+      "name": "renard",
+      "continent": "europe",
+      "id": "3"
+    }
+  ]
+}

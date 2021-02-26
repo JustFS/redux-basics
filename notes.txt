@@ -1,0 +1,13 @@
+npm i -s react-redux redux redux-thunk redux-devtools-extension
+
+1- provider qui englobe l'app
+2- creation store
+3- création reducers
+4- création actions
+
+
+
+
+
+npm install -g json-server
+json-server --watch db.json
