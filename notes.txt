@@ -9,5 +9,5 @@ npm i -s react-redux redux redux-thunk redux-devtools-extension
 
 
 
-npm install -g json-server
-json-server --watch db.json
+npm i -g json-server
+json-server --w db.json

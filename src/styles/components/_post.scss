@@ -1,0 +1,12 @@
+.post {
+  border: 2px solid $color-2;
+  padding: 20px;
+
+  img {
+    width: 100%;
+    height: 50px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+  }
+}

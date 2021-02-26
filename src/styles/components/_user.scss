@@ -1,0 +1,12 @@
+.user-container {
+  margin-left: 10px;
+  .user {
+    border: 1px solid $color-2;
+    text-align: center;
+  }
+
+  img {
+    border-radius: 150px;
+    height: 60px;
+  }
+}
