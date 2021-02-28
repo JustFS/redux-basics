@@ -1,15 +1,19 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "./actions/post.action";
 import Post from "./components/Post";
 import PostForm from "./components/PostForm";
 import User from "./components/User";
+import { isEmpty } from "./components/Utils";
 
 const App = () => {
-  const [posts, setPosts] = useState();
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.postReducer);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/posts").then((res) => setPosts(res.data));
-  }, []);
+    dispatch(getPosts());
+    console.log(typeof posts);
+  }, [dispatch]);
 
   return (
     <div>
@@ -17,7 +21,8 @@ const App = () => {
       <PostForm />
       <div className="content">
         <div className="post-container">
-          {posts && posts.map((post) => <Post post={post} key={post.id} />)}
+          {!isEmpty(posts) &&
+            posts.map((post) => <Post post={post} key={post.id} />)}
         </div>
         <User />
       </div>

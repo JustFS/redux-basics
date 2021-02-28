@@ -1,8 +1,11 @@
 .user-container {
   margin-left: 10px;
+  position: relative;
   .user {
     border: 1px solid $color-2;
     text-align: center;
+    position: fixed;
+    width: 190px;
   }
 
   img {

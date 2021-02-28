@@ -1,0 +1,12 @@
+.form-container {
+  border: 1px solid $color-2;
+  margin: 20px 0;
+  width: 50%;
+  max-width: 500px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+  }
+}
