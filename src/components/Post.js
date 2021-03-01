@@ -13,13 +13,14 @@ const Post = ({ post }) => {
   const handleEdit = (e) => {
     e.preventDefault();
 
-    const data = {
+    const postData = {
       title: post.title,
       author: user[0].pseudo,
       content: editContent,
       likes: post.likes,
+      id: post.id,
     };
-    dispatch(editPost(post.id, data));
+    dispatch(editPost(postData));
     setEditToggle(false);
   };
 

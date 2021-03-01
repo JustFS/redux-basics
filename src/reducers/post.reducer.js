@@ -16,13 +16,10 @@ export default function postReducer(state = initialState, action) {
       return [action.payload, ...state];
     case EDIT_POST:
       return state.map((post) => {
-        if (post.id === action.payload.postId) {
+        if (post.id === action.payload.id) {
           return {
-            title: action.payload.title,
-            author: action.payload.author,
+            ...post,
             content: action.payload.content,
-            likes: action.payload.likes,
-            id: action.payload.postId,
           };
         } else return post;
       });
@@ -30,13 +27,10 @@ export default function postReducer(state = initialState, action) {
       return state.filter((post) => post.id !== action.payload.postId);
     case ADD_LIKE:
       return state.map((post) => {
-        if (post.id === action.payload.postId) {
+        if (post.id === action.payload.id) {
           return {
-            title: action.payload.title,
-            author: action.payload.author,
-            content: action.payload.content,
+            ...post,
             likes: action.payload.likes,
-            id: action.payload.postId,
           };
         } else return post;
       });

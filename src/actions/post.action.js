@@ -5,7 +5,6 @@ export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
 export const ADD_LIKE = "ADD_LIKE";
-export const ADD_USER_LIKE = "ADD_USER_LIKE";
 
 export const getPosts = () => {
   return (dispatch) => {
@@ -29,15 +28,15 @@ export const addPost = (data) => {
   };
 };
 
-export const editPost = (postId, data) => {
+export const editPost = (data) => {
   return (dispatch) => {
     return axios({
       method: "put",
-      url: `http://localhost:3000/posts/${postId}`,
+      url: `http://localhost:3000/posts/${data.id}`,
       data: { ...data },
     })
-      .then((res) => {
-        dispatch({ type: EDIT_POST, payload: { ...data, postId } });
+      .then(() => {
+        dispatch({ type: EDIT_POST, payload: { ...data } });
       })
       .catch((err) => console.log(err));
   };
@@ -49,23 +48,22 @@ export const deletePost = (postId) => {
       method: "delete",
       url: `http://localhost:3000/posts/${postId}`,
     })
-      .then((res) => {
+      .then(() => {
         dispatch({ type: DELETE_POST, payload: { postId } });
       })
       .catch((err) => console.log(err));
   };
 };
 
-export const addLike = (postId, data) => {
+export const addLike = (data) => {
   return (dispatch) => {
     return axios({
       method: "put",
-      url: `http://localhost:3000/posts/${postId}`,
+      url: `http://localhost:3000/posts/${data.id}`,
       data: { ...data },
     })
       .then((res) => {
-        dispatch({ type: ADD_LIKE, payload: { ...data, postId } });
-        dispatch({ type: ADD_USER_LIKE });
+        dispatch({ type: ADD_LIKE, payload: { ...data } });
       })
       .catch((err) => console.log(err));
   };
