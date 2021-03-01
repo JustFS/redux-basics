@@ -12,7 +12,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getPosts());
-    console.log(typeof posts);
   }, [dispatch]);
 
   return (
@@ -22,7 +21,7 @@ const App = () => {
       <div className="content">
         <div className="post-container">
           {!isEmpty(posts) &&
-            posts.map((post) => <Post post={post} key={post.id} />)}
+            posts.map((post, index) => <Post post={post} key={index} />)}
         </div>
         <User />
       </div>

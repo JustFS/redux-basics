@@ -1,21 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deletePost, editPost } from "../actions/post.action";
+import Like from "./Like";
+import { isEmpty } from "./Utils";
 
 const Post = ({ post }) => {
-  let number = Math.floor(Math.random() * 200);
-  let link = "https://picsum.photos/1500/" + number + "?random";
+  const [editToggle, setEditToggle] = useState(false);
+  const [editContent, setEditContent] = useState(post.content);
+  const user = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      title: post.title,
+      author: user[0].pseudo,
+      content: editContent,
+      likes: post.likes,
+    };
+    dispatch(editPost(post.id, data));
+    setEditToggle(false);
+  };
 
   return (
     <div className="post">
-      <div className="edit-delete">
-        <img src="./icons/edit.svg" alt="edit" />
-        <img src="./icons/delete.svg" alt="delete" />
-      </div>
+      {!isEmpty(user[0]) && user[0].pseudo === post.author && (
+        <div className="edit-delete">
+          <img
+            onClick={() => setEditToggle(!editToggle)}
+            src="./icons/edit.svg"
+            alt="edit"
+          />
+          <img
+            onClick={() => dispatch(deletePost(post.id))}
+            src="./icons/delete.svg"
+            alt="delete"
+          />
+        </div>
+      )}
       <h2>{post.title}</h2>
-      <img src={link} class="post-img" alt="img-post" />
-      <p>{post.content}</p>
+      <img
+        src="https://picsum.photos/1500/400"
+        className="post-img"
+        alt="img-post"
+      />
+
+      {editToggle ? (
+        <form onSubmit={(e) => handleEdit(e)}>
+          <textarea
+            type="text"
+            defaultValue={post.content}
+            onChange={(e) => setEditContent(e.target.value)}
+          />
+          <input type="submit" value="Valider modification" />
+        </form>
+      ) : (
+        <p>{post.content}</p>
+      )}
       <div className="author">
-        <h4>{post.author}</h4>
-        <img src="./icons/clap.png" class="clap" alt="clap" />
+        <h5>{post.author}</h5>
+        <Like post={post} />
       </div>
     </div>
   );
